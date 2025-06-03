@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    form {
+      max-width: 500px;
+      margin: auto;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .error {
+      color: red;
+      font-size: 0.9em;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Contact Us</h2>
+
+<form id="contactForm" onsubmit="return validateForm()">
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name">
+  <div class="error" id="nameError"></div>
+
+  <label for="email">Email:</label>
+  <input type="text" id="email" name="email">
+  <div class="error" id="emailError"></div>
+
+  <label for="subject">Subject:</label>
+  <input type="text" id="subject" name="subject">
+  <div class="error" id="subjectError"></div>
+
+  <label for="message">Message:</label>
+  <textarea id="message" name="message" rows="4"></textarea>
+  <div class="error" id="messageError"></div>
+
+  <button type="submit">Send</button>
+</form>
+
+<script>
+  function validateForm() {
+    let isValid = true;
+
+    // Clear previous errors
+    document.getElementById('nameError').textContent = '';
+    document.getElementById('emailError').textContent = '';
+    document.getElementById('subjectError').textContent = '';
+    document.getElementById('messageError').textContent = '';
+
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const subject = document.getElementById('subject').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    // Name validation
+    if (name === '') {
+      document.getElementById('nameError').textContent = 'Name is required.';
+      isValid = false;
+    }
+
+    // Email validation
+    const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    if (email === '') {
+      document.getElementById('emailError').textContent = 'Email is required.';
+      isValid = false;
+    } else if (!emailPattern.test(email)) {
+      document.getElementById('emailError').textContent = 'Invalid email format.';
+      isValid = false;
+    }
+
+    // Subject validation
+    if (subject === '') {
+      document.getElementById('subjectError').textContent = 'Subject is required.';
+      isValid = false;
+    }
+
+    // Message validation
+    if (message === '') {
+      document.getElementById('messageError').textContent = 'Message is required.';
+      isValid = false;
+    } else if (message.length < 10) {
+      document.getElementById('messageError').textContent = 'Message should be at least 10 characters.';
+      isValid = false;
+s
